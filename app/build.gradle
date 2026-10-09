@@ -1,0 +1,79 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.mamali.ataritv'
+    compileSdk 34
+    ndkVersion "28.2.13676358"
+
+    // Release signing reads the workspace-only keystore.properties
+    // (gitignored, never committed) — same pattern as River Ride.
+    def keystorePropsFile = rootProject.file("keystore.properties")
+    def keystoreProps = new Properties()
+    if (keystorePropsFile.exists()) {
+        keystoreProps.load(new FileInputStream(keystorePropsFile))
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropsFile.exists()) {
+                storeFile rootProject.file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.mamali.ataritv"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            // TV devices are arm64; the Stella core is built arm64-v8a only.
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    lint {
+        // Release lint needs a huge kotlin-compiler download through the
+        // proxy; unit tests + assembleDebug are the gates for this cycle.
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    // LibretroDroid 0.14.0 — vendored source module (JitPack unreachable in
+    // the build sandbox). Pinned commit 8835c3098514390a271e36983957f7bb5f40abf1.
+    implementation project(':libretrodroid')
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.documentfile:documentfile:1.0.1'
+    // ComponentActivity (no AppCompat): registerForActivityResult + lifecycleScope
+    // for plain android.app.Activity subclasses.
+    implementation 'androidx.activity:activity-ktx:1.9.3'
+}

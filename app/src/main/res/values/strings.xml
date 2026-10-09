@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<resources>
+    <string name="app_name">Atari TV</string>
+    <string name="shelf_title">Atari TV</string>
+    <string name="add_game">Add game</string>
+    <string name="add_folder">Add ROM folder</string>
+    <string name="add_files">Add ROM files</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="continue_badge">\u25B6 Continue</string>
+    <string name="folder_unavailable_msg">Folder unavailable \u2014 re-add it in Settings</string>
+    <string name="resume">Resume</string>
+    <string name="save_state">Save state</string>
+    <string name="load_state">Load state</string>
+    <string name="reset_game">Reset game</string>
+    <string name="console_select">Console: SELECT</string>
+    <string name="console_reset">Console: RESET</string>
+    <string name="difficulty_l">Difficulty L: B/A</string>
+    <string name="difficulty_r">Difficulty R: B/A</string>
+    <string name="back_to_shelf">Back to shelf</string>
+    <string name="scanlines">CRT scanlines</string>
+    <string name="scanlines_summary">Classic CRT scan-line shader \u2014 applies when the next game launches (off by default)</string>
+    <string name="sources_title">ROM sources</string>
+    <string name="remove">Remove</string>
+    <string name="settings">Settings</string>
+    <string name="save_failed">Save failed \u2014 storage full</string>
+    <string name="saved">Saved</string>
+    <string name="loaded">Loaded</string>
+    <string name="load_failed">Load failed</string>
+    <string name="load_error">Couldn\u2019t load this ROM</string>
+    <string name="core_mismatch">Saved with a different core version \u2014 may not load</string>
+    <string name="remove_game_confirm">Remove this game and its saves?</string>
+    <string name="cancel">Cancel</string>
+    <string name="saves_quota_warn">Save storage full \u2014 oldest auto saves were deleted</string>
+    <string name="no_games">No games yet.\nPick \u201CAdd game\u201D to import your ROMs.</string>
+    <string name="test_cart_title">Atari TV Test Cart</string>
+</resources>

@@ -1,0 +1,65 @@
+--- a/libretrodroid/build.gradle
++++ b/libretrodroid/build.gradle
+@@ -5,9 +5,13 @@
+ group='com.github.Swordfish90'
+
+ android {
++    // Vendoring patch (Atari TV): android-33 is not installed in this SDK;
++    // the module builds identically against 34.
+     namespace = "com.swordfish.libretrodroid"
+-    compileSdkVersion 33
++    compileSdkVersion 34
+     buildToolsVersion "34.0.0"
++    // Vendoring patch (Atari TV): pin NDK r28 (AGP otherwise picks r27).
++    ndkVersion "28.2.13676358"
+
+
+     defaultConfig {
+@@ -16,6 +20,12 @@
+         versionCode 1
+         versionName "1.0"
+
++        // Vendoring patch (Atari TV): build only the ABI we ship, so the
++        // module's CMake native build doesn't compile 4 ABIs every time.
++        ndk {
++            abiFilters 'arm64-v8a'
++        }
++
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+         consumerProguardFiles 'consumer-rules.pro'
+
+--- a/libretrodroid/src/main/cpp/libretrodroid.h
++++ b/libretrodroid/src/main/cpp/libretrodroid.h
+@@ -28,6 +28,8 @@
+ #include <mutex>
+ #include <memory>
+ #include <optional>
++// Vendoring patch (Atari TV): NDK r28's libc++ needs this explicitly.
++#include <functional>
+
+ #include "log.h"
+ #include "core.h"
+--- a/libretrodroid/src/main/cpp/rumble.h
++++ b/libretrodroid/src/main/cpp/rumble.h
+@@ -20,6 +20,9 @@
+
+ #include <array>
+
++// Vendoring patch (Atari TV): NDK r28's libc++ needs this explicitly.
++#include <functional>
++
+ #include "rumblestate.h"
+
+ namespace libretrodroid {
+--- a/libretrodroid/src/main/cpp/utils/javautils.h
++++ b/libretrodroid/src/main/cpp/utils/javautils.h
+@@ -20,6 +20,9 @@
+
+ #include "unordered_map"
+ #include "string"
++// Vendoring patch (Atari TV): NDK r28's libc++ no longer transitively
++// provides std::function here; include it explicitly.
++#include "functional"
+
+ #include <jni.h>
+ #include "../environment.h"

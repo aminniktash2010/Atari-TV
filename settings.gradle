@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // NOTE: JitPack is unreachable from the build sandbox, so LibretroDroid
+        // 0.14.0 is vendored as a source module (:libretrodroid) at the pinned
+        // commit 8835c3098514390a271e36983957f7bb5f40abf1 (see README / NOTICE).
+    }
+}
+rootProject.name = "atari-tv"
+include(":app")
+include(":libretrodroid")
+project(":libretrodroid").projectDir = file("vendor/LibretroDroid/libretrodroid")

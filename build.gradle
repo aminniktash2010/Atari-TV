@@ -1,0 +1,11 @@
+// Top-level build file for Atari TV.
+// SPDX-License-Identifier: GPL-3.0-or-later
+plugins {
+    id 'com.android.application' version '8.7.3' apply false
+    id 'com.android.library' version '8.7.3' apply false
+    id 'org.jetbrains.kotlin.android' version '2.0.21' apply false
+}
+
+// The vendored :libretrodroid module references $kotlin_version (defined in
+// its own upstream root project, which we don't include); define it here.
+ext.kotlin_version = '2.0.21'
