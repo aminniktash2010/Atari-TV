@@ -31,6 +31,10 @@ cd "$VENDOR_DIR"
 git fetch --depth 1 origin "$PIN"
 git checkout "$PIN"
 
+echo "== initializing submodules (shallow, pinned commits)"
+git submodule update --init --depth 1 -- libretrodroid/src/main/cpp/oboe \
+  libretrodroid/src/main/cpp/libretro/libretro-common
+
 echo "== applying Atari TV patches"
 git apply "$PROJ_ROOT/tools/libretrodroid-atari-tv.patch"
 
