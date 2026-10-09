@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Gradle / Android
+.gradle/
+build/
+app/build/
+libretrodroid/build/
+vendor/LibretroDroid/libretrodroid/build/
+vendor/LibretroDroid/libretrodroid/.cxx/
+local.properties
+*.iml
+
+# Core build scratch (rebuild with tools/build_core.sh; commit recorded in
+# core-build/CORE_VERSION.txt content via app/src/main/assets/core_version.txt)
+core-build/
+
+# Keystores / credentials (never commit)
+*.jks
+*.keystore
+keystore.properties
+*.env
+
+# OS
+.DS_Store
+
+# Prebuilt core binary (rebuild with tools/build_core.sh)
+app/src/main/jniLibs/
+
+# BMAD working dirs (docs live in the goal workspace)
+_bmad/
+_bmad-output/
+vendor/
+
+# Generated test ROM (regenerate with tools/gen_test_rom.py)
+app/src/main/assets/test_cart.bin
